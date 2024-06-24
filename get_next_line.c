@@ -19,7 +19,7 @@ static void	free_string(char *str)
 		free(str);
 }
 
-static size_t	find_nl_index(char *stash)
+static size_t	find_nl(char *stash)
 {
 	size_t	i;
 
@@ -33,22 +33,16 @@ static size_t	find_nl_index(char *stash)
 	return (i);
 }
 
-static char	*cut_up_to_nl(char *stash) //или size_t?
+static char	*cut_up_to_nl(char *stash)
 {
 	char	*up_to_nl;
 	int		i;
-	size_t	nl;
 
 	if (!stash || stash[0] == '\0')
 		return (NULL);
-	nl = find_nl_index(stash);
-	up_to_nl = (char *)malloc((nl + 1) * sizeof(char)); //+1 не в скобках?
+	up_to_nl = (char *)malloc((find_nl(stash) + 1) * sizeof(char));
 	if (!up_to_nl)
-	{
-		// free(stash);
-		// stash = NULL;
 		return (NULL);
-	}
 	i = 0;
 	while (stash[i] != '\0' && stash[i] != '\n')
 	{
@@ -81,7 +75,7 @@ static char	*new_stash(char *stash)
 		stash = NULL;
 		return (NULL);
 	}
-	nl = find_nl_index(stash);
+	nl = find_nl(stash);
 	new = (char *)malloc((ft_strlen(stash) - nl + 1) * sizeof(char));
 	if (!new)
 	{

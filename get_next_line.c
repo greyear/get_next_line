@@ -13,10 +13,12 @@
 #include <string.h>
 #include <limits.h> // is it allowed?
 
-static void	free_string(char *str)
+static char	*free_string(char **str)
 {
-	if (str)
-		free(str);
+	if (*str)
+		free(*str);
+	*str = NULL;
+	return (NULL);
 }
 
 static size_t	find_nl(char *stash)
@@ -70,29 +72,18 @@ static char	*new_stash(char *stash)
 	if (!stash)
 		return (NULL);
 	if (stash[0] == '\0')
-	{
-		free_string(stash);
-		stash = NULL;
-		return (NULL);
-	}
+		return (free_string(&stash));
 	nl = find_nl(stash);
 	new = (char *)malloc((ft_strlen(stash) - nl + 1) * sizeof(char));
 	if (!new)
-	{
-		free_string(stash);
-		stash = NULL;
-		return (NULL);
-	}
+		return (free_string(&stash));
 	i = 0;
 	while (stash[nl] != '\0')
 		new[i++] = stash[nl++];
 	new[i] = '\0';
 	if (new[0] == '\0')
-	{
-		free_string(new);
-		new = NULL;
-	}
-	free_string(stash);
+		free_string(&new);
+	free_string(&stash);
 	return (new);
 }
 
@@ -108,44 +99,30 @@ char	*get_next_line(int fd)
 		return (NULL);
 	buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buf)
-	{
-		free(stash);
-		stash = NULL;
-		return (NULL);
-	}
+		return (free_string(&stash));
 	bytes = 1;
-	while (!ft_strchr(stash, '\n') && (bytes != 0)) //allowed?
+	while (!ft_strchr(stash, '\n') && (bytes != 0))
 	{
 		bytes = read(fd, buf, BUFFER_SIZE);
 		if (bytes == -1)
 		{
-			free_string(buf);
-			free_string(stash);
-			stash = NULL;
-			return (NULL);
+			free_string(&buf);
+			return (free_string(&stash));
 		}
 		buf[bytes] = '\0';
 		temp = ft_strjoin_stash(stash, buf);
 		if (!temp)
 		{
-			free_string(stash);
-			stash = NULL;
-			free_string(buf);
-			buf = NULL;
-			return (NULL);
+			free_string(&stash);
+			return (free_string(&buf));
 		}
-		free_string(stash);
-		stash = NULL;
+		free_string(&stash);
 		stash = temp;
 	}
 	free(buf);// don't need buf because reads in loop are over
 	res = cut_up_to_nl(stash);
 	if (!res)
-	{
-		free(stash);
-		stash = NULL;
-		return (NULL);
-	}
+		return (free_string(&stash));
 	stash = new_stash(stash);
 	return (res);
 }

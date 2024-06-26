@@ -13,9 +13,10 @@ int	main(void)
 	int			count;
 	int			bytes;
 
-	fd = open("lolita.txt", O_RDONLY);
-	//fd = open("empty.txt", O_RDONLY);
-	//fd = open("nl3.txt", O_RDONLY);
+	//fd = open("lolita.txt", O_RDONLY);
+	//fd = open("bible.txt", O_RDONLY);
+	fd = open("empty.txt", O_RDONLY);
+	//fd = open("nl.txt", O_RDONLY);
 	//fd = open("nls.txt", O_RDONLY);
 	//fd = open("letter.txt", O_RDONLY);
 	if (fd == -1)

@@ -14,8 +14,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <fcntl.h>
-# include <stdio.h>
+# include <limits.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
@@ -26,5 +25,6 @@ size_t	ft_strlen(const char *str);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strjoin_stash(char *stash, char *buf);
 char	*ft_substr(char *stash, unsigned int start, size_t len);
+size_t	find_nl(char *stash);
 
 #endif

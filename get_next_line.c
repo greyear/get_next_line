@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
-#include <string.h>
-#include <limits.h> // is it allowed?
 
 static char	*free_string(char **str)
 {
@@ -19,20 +17,6 @@ static char	*free_string(char **str)
 		free(*str);
 	*str = NULL;
 	return (NULL);
-}
-
-static size_t	find_nl(char *stash)
-{
-	size_t	i;
-
-	if (!stash)
-		return (0);
-	i = 0;
-	while (stash[i] != '\0' && stash[i] != '\n')
-		i++;
-	if (stash[i] == '\n')
-		i++;
-	return (i);
 }
 
 static char	*cut_up_to_nl(char *stash)
@@ -60,9 +44,6 @@ static char	*cut_up_to_nl(char *stash)
 	return (up_to_nl);
 }
 
-// this function is responsible for the new stash state.
-// it should free the stash array if it contains only null terminator.
-// the argument of this function is modifiable!
 static char	*new_stash(char *stash)
 {
 	char	*new;

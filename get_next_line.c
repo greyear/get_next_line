@@ -87,12 +87,31 @@ static char	*new_stash(char *stash)
 	return (new);
 }
 
+static int	read_until_nl(int fd, char **stash, char **buf)
+{
+	char	*temp;
+	int	bytes;
+
+	bytes = 1;
+	while (!ft_strchr(*stash, '\n') && (bytes != 0))
+	{
+		bytes = read(fd, *buf, BUFFER_SIZE);
+		if (bytes == -1)
+			return (-1);
+		(*buf)[bytes] = '\0';
+		temp = ft_strjoin_stash(*stash, *buf);
+		if (!temp)
+			return (-1);
+		free_string(stash);
+		*stash = temp;
+	}
+	return (0);
+}
+
 char	*get_next_line(int fd)
 {
 	static char		*stash;
-	int				bytes;
 	char			*buf;
-	char			*temp;
 	char			*res;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE > INT_MAX)
@@ -100,26 +119,12 @@ char	*get_next_line(int fd)
 	buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buf)
 		return (free_string(&stash));
-	bytes = 1;
-	while (!ft_strchr(stash, '\n') && (bytes != 0))
+	if (read_until_nl(fd, &stash, &buf) == -1)
 	{
-		bytes = read(fd, buf, BUFFER_SIZE);
-		if (bytes == -1)
-		{
-			free_string(&buf);
-			return (free_string(&stash));
-		}
-		buf[bytes] = '\0';
-		temp = ft_strjoin_stash(stash, buf);
-		if (!temp)
-		{
-			free_string(&stash);
-			return (free_string(&buf));
-		}
-		free_string(&stash);
-		stash = temp;
+		free_string(&buf);
+		return (free_string(&stash));
 	}
-	free(buf);// don't need buf because reads in loop are over
+	free(buf);
 	res = cut_up_to_nl(stash);
 	if (!res)
 		return (free_string(&stash));

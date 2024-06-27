@@ -11,14 +11,14 @@ int	main(void)
 	int			fd;
 	char		*next_line;
 	int			count;
-	int			bytes;
 
 	//fd = open("lolita.txt", O_RDONLY);
 	//fd = open("bible.txt", O_RDONLY);
-	fd = open("empty.txt", O_RDONLY);
+	//fd = open("empty.txt", O_RDONLY);
 	//fd = open("nl.txt", O_RDONLY);
 	//fd = open("nls.txt", O_RDONLY);
 	//fd = open("letter.txt", O_RDONLY);
+	fd = open("someonescode.txt", O_RDONLY);
 	if (fd == -1)
 		return (1);
 	count = 0;

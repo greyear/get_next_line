@@ -71,7 +71,7 @@ static char	*new_stash(char *stash)
 static int	read_until_nl(int fd, char **stash, char **buf)
 {
 	char	*temp;
-	int	bytes;
+	int		bytes;
 
 	bytes = 1;
 	while (!ft_strchr(*stash, '\n') && (bytes != 0))
@@ -105,7 +105,7 @@ char	*get_next_line(int fd)
 		free_string(&buf);
 		return (free_string(&stash));
 	}
-	free(buf);
+	free_string(&buf);
 	res = cut_up_to_nl(stash);
 	if (!res)
 		return (free_string(&stash));

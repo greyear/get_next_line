@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: azinchen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/28 16:27:22 by azinchen          #+#    #+#             */
+/*   Updated: 2024/06/28 16:31:24 by azinchen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "get_next_line_bonus.h"
 
 static char	*free_string(char **str)
@@ -60,7 +71,7 @@ static char	*new_stash(char *stash)
 static int	read_until_nl(int fd, char **stash, char **buf)
 {
 	char	*temp;
-	int	bytes;
+	int		bytes;
 
 	bytes = 1;
 	while (!ft_strchr(*stash, '\n') && (bytes != 0))
@@ -84,8 +95,8 @@ char	*get_next_line(int fd)
 	char			*buf;
 	char			*res;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE > INT_MAX || 
-			fd > OPEN_MAX)
+	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE > INT_MAX
+		|| fd > OPEN_MAX)
 		return (NULL);
 	buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buf)

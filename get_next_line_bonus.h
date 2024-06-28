@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azinchen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/28 16:27:46 by azinchen          #+#    #+#             */
-/*   Updated: 2024/06/28 16:27:49 by azinchen         ###   ########.fr       */
+/*   Created: 2024/06/28 16:57:20 by azinchen          #+#    #+#             */
+/*   Updated: 2024/06/28 16:57:21 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #ifndef GET_NEXT_LINE_BONUS_H
 # define GET_NEXT_LINE_BONUS_H
 

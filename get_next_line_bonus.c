@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azinchen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/28 16:27:22 by azinchen          #+#    #+#             */
-/*   Updated: 2024/06/28 16:31:24 by azinchen         ###   ########.fr       */
+/*   Created: 2024/06/28 16:56:03 by azinchen          #+#    #+#             */
+/*   Updated: 2024/06/28 16:56:49 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "get_next_line_bonus.h"
 
 static char	*free_string(char **str)
